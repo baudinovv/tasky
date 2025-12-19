@@ -1,5 +1,6 @@
 <script setup lang="ts" >
 import { ref, computed } from 'vue';
+import type { Todo } from '../utils/types/Todo';
 
 // State
 const newTask = ref('');
@@ -21,11 +22,11 @@ const addTodo = () => {
   newTask.value = ''; // Clear input
 };
 
-const removeTodo = (id) => {
+const removeTodo = (id: number) => {
   todos.value = todos.value.filter(todo => todo.id !== id);
 };
 
-const toggleComplete = (todo) => {
+const toggleComplete = (todo: Todo) => {
   todo.completed = !todo.completed;
 };
 
