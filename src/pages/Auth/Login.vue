@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { computed, ref } from 'vue';
+  import { ref } from 'vue';
 import FormsInput from '../../components/UI/FormsInput.vue';
 import FormsButton from '../../components/UI/FormsButton.vue';
 import { useUserStore } from '../../App/store/useUsersStore';

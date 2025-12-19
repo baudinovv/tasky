@@ -6,6 +6,7 @@ import Report from '../pages/Report.vue'
 import Login from '../pages/Auth/Login.vue'
 import Register from '../pages/Auth/Register.vue'
 import Tasks from '../pages/Tasks.vue'
+
 const routes = [
   { path: '/', component: Home },
   { path: '/:title', component: Project },
@@ -21,7 +22,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 })
-router.beforeEach((to, from) => {
+router.beforeEach((to) => {
   const isAuthenticated = localStorage.getItem('session')
 
   // 1. Handle Auth pages (Login/Register)

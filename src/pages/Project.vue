@@ -13,7 +13,7 @@ const { user } = useUserStore();
 const route = useRoute();
 
 onMounted(async () => {
-  await fetchMainProject(user.id, route.params.title as string)
+  await fetchMainProject(user?.id || "", route.params.title as string)
   console.log((mainProject.time));
 });
 

@@ -1,9 +1,8 @@
 import type { User } from '@supabase/supabase-js'
 import { defineStore } from 'pinia'
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import { supabase } from '../supabase/supabase'
 import router from '../router'
-import type { Profile } from '../../utils/types/Profile'
 
 export const useUserStore = defineStore('user', () => {
   const isLoggedIn = ref<boolean>(false)
@@ -20,7 +19,6 @@ export const useUserStore = defineStore('user', () => {
   }
   
   const user = ref<User | null>(getStoredUser())
-  // let user = reactive<User>(JSON.parse(localStorage.getItem('session')!).user)
 
   function setUser(obj: User) {
     Object.assign(user, obj);

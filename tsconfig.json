@@ -4,8 +4,14 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ],
-  "types": [
-    "vite/client"
-  ]
+  "compilerOptions": {
+    "types": [
+      "vite/client"
+    ],
+    "composite": true,
+    "allowJs": true,
+    "emitDeclarationOnly": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
 
