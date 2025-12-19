@@ -1,4 +1,4 @@
-import { ref , computed, watch, defineEmits } from "vue"
+import { ref , computed } from "vue"
 export function useTimer(initial : number) {
   const totalSeconds = ref(initial);
   let interval: number;

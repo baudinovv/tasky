@@ -20,7 +20,7 @@ import { formatTime } from '../utils/formatTime'
 const { projects, fetchProjects, loading } = useProjects()
 const { user } = useUserStore()
 
-onMounted(() => fetchProjects(user.id))
+onMounted(() => fetchProjects(user?.id!))
 
 const nowTime = new Date()
 

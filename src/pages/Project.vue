@@ -3,7 +3,6 @@ import { onMounted } from 'vue';
 import { useUserStore } from '../App/store/useUsersStore';
 import stopwatch from '../components/Stopwatch.vue';
 import { useProjects } from '../composables/useProjects';
-import { useTimer } from '../composables/useTimer';
 import { useRoute } from 'vue-router';
 import NotFound from './NotFound.vue';
 import SpinnerLoader from '../components/UI/SpinnerLoader.vue';

@@ -1,4 +1,4 @@
-import { createWebHistory, createRouter, RouterLink } from 'vue-router'
+import { createWebHistory, createRouter } from 'vue-router'
 import Home from '../pages/Home.vue'
 import Project from '../pages/Project.vue'
 import Settings from '../pages/Settings.vue'
@@ -21,26 +21,24 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 })
-
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, from) => {
   const isAuthenticated = localStorage.getItem('session')
-  // Allow access to login page without auth
+
+  // 1. Handle Auth pages (Login/Register)
   if (to.path === '/login' || to.path === '/register') {
     if (isAuthenticated) {
-      next('/') // Already logged in, go to home
-    } else {
-      next() // Not logged in, allow access
+      return '/' // Redirect to home if already logged in
     }
-    return
+    return true // Allow access
   }
-  
-  // For all other routes, check auth
+
+  // 2. Protect all other routes
   if (!isAuthenticated) {
-    next('/login')
-    return
+    return '/login' // Redirect to login if not authenticated
   }
-  
-  next()
+
+  // 3. Allow navigation by default
+  return true
 })
 
 export default router;

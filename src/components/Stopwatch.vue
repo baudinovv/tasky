@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import { useTimer } from '../composables/useTimer'
-import { useGlobalKeydown } from '../composables/useGlobalKeydown';
 import { formatTime } from '../utils/formatTime';
-import Project from '../pages/Project.vue';
-import { onMounted } from 'vue';
 import { watch } from 'vue';
-import { useProjects } from '../composables/useProjects';
-import { useUserStore } from '../App/store/useUsersStore';
-import { useRoute } from 'vue-router';
 const props = defineProps({
   disabled: {
     type: Boolean, 
