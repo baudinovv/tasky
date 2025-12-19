@@ -1,35 +1,56 @@
 <script setup lang="ts">
 import { useTimer } from '../composables/useTimer'
+import { useGlobalKeydown } from '../composables/useGlobalKeydown';
+import { formatTime } from '../utils/formatTime';
+import Project from '../pages/Project.vue';
+import { onMounted } from 'vue';
+import { watch } from 'vue';
+import { useProjects } from '../composables/useProjects';
+import { useUserStore } from '../App/store/useUsersStore';
+import { useRoute } from 'vue-router';
+const props = defineProps({
+  disabled: {
+    type: Boolean, 
+    default : false
+  },
+  initial : {
+    type: Number,
+  }
+})
 
-const initial = 'Start Time Tracker'
 
-const { toggle, isRunning, days, hours, minutes, seconds } = useTimer()
+const { isRunning, totalSeconds, toggle, update } = useTimer(props.initial);
+
+const emit = defineEmits(['upd'])
+
+watch(totalSeconds, () => {
+  if(totalSeconds.value % 2 === 0){
+    emit('upd', totalSeconds.value);
+  }
+})
 
 </script>
 
 <template>
-  <section
-    @click="toggle"
-    class="bg-white flex items-center justify-center rounded-3xl gap-5 cursor-pointer px-10 py-8"
+  <button
+    @click="!disabled ? toggle(): null"
+    class="bg-white flex items-center  transition justify-center rounded-3xl gap-5 cursor-pointer px-10 py-8"
+    type="button"
   >
     <h1 class="text-2xl font-bold w-[250px] text-center">
       {{
-        seconds == 0
-          ? initial
-          : `${days > 9 ? '' : '0'}${days}:${hours > 9 ? '' : '0'}${hours}:${
-              minutes > 9 ? '' : '0'
-            }${minutes}:${seconds > 9 ? '' : '0'}${seconds}`
+        formatTime(totalSeconds)
       }}
     </h1>
-    <!-- <button class="rounded-xl bg-amber-400 p-4"> -->
-    <button
+    <section
       :class="
         'transition rounded-xl p-4 ' +
-        (isRunning ? 'bg-red-500' : 'bg-amber-400')
+        (disabled ? 'bg-gray-200' :
+        (isRunning ? 'bg-red-500' : 'bg-amber-400'))
       "
     >
       <img v-if="!isRunning" class="size-4" src="../assets/play.png" alt="" />
       <div v-else class="size-4 bg-black rounded-xs"></div>
-    </button>
-  </section>
+    </section>
+  </button>
 </template>

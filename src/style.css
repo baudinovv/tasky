@@ -3,3 +3,20 @@
 * {
   font-family: "Poppins", sans-serif;
 }
+
+@theme {
+  --color-text: white;
+  --color-icon: white;
+  --color-bg: rgb(29, 29, 29);
+  --color-bg-secondary: rgb(83, 83, 83);
+}
+
+.light {
+  --color-text: black;
+  --color-icon: black;
+  --color-bg: white;
+  --color-bg-secondary: #F3F4F6;
+}
+* {
+  box-sizing: border-box;
+}

@@ -9,9 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.87.1",
     "@tailwindcss/vite": "^4.1.14",
+    "pinia": "^3.0.4",
+    "save-dev": "0.0.1-security",
     "tailwindcss": "^4.1.14",
     "vue": "^3.5.22",
+    "@types/node": "^24.6.0",
     "vue-router": "^4.6.3"
   },
   "devDependencies": {

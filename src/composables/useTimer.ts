@@ -1,29 +1,16 @@
-import { h, ref } from "vue"
-
-export function useTimer() {
-
-  const seconds = ref(0);
-  const minutes = ref(0);
-  const hours = ref(0);
-  const days = ref(0);
-
-  let interval: number
-  let isRunning = ref(false)
+import { ref , computed, watch, defineEmits } from "vue"
+export function useTimer(initial : number) {
+  const totalSeconds = ref(initial);
+  let interval: number;
+  let isRunning = ref(false);
+  // Computed properties for time units
+  const days = computed(() => Math.floor(totalSeconds.value / 86400));
+  const hours = computed(() => Math.floor((totalSeconds.value % 86400) / 3600));
+  const minutes = computed(() => Math.floor((totalSeconds.value % 3600) / 60));
+  const seconds = computed(() => totalSeconds.value % 60);
 
   function update() {
-    if (seconds.value === 59) {
-      seconds.value = 0;
-      minutes.value++;
-    }
-    if (minutes.value === 59) {
-      minutes.value = 0;
-      hours.value++;
-    }
-    if (hours.value === 24) {
-      hours.value = 0;
-      days.value++;
-    }
-    seconds.value++;
+    totalSeconds.value++;
   }
 
   function start() {
@@ -36,10 +23,21 @@ export function useTimer() {
     clearInterval(interval);
   }
 
-  const toggle = () => {
+  function toggle() {
     if (isRunning.value) stop();
     else start();
   }
 
-  return { toggle , isRunning , days, hours, minutes, seconds };
+  function reset(newValue: number) {
+    stop();
+    
+    totalSeconds.value = newValue;
+    console.log("timer reseted to", newValue)
+  }
+
+
+  return {
+    days, hours, minutes, seconds, update, start, stop, toggle, isRunning, reset, totalSeconds
+  }
+
 }
