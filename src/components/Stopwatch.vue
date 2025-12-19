@@ -13,7 +13,7 @@ const props = defineProps({
 })
 
 
-const { isRunning, totalSeconds, toggle, update } = useTimer(props.initial);
+const { isRunning, totalSeconds, toggle } = useTimer(props.initial || 0);
 
 const emit = defineEmits(['upd'])
 

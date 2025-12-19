@@ -4,7 +4,7 @@ import { Transition } from 'vue'
 const props = defineProps({
   closeModal: {
     type: Function,
-    default: (payLoad: PointerEvent): void => {},
+    default: (): void => {},
   },
 })
 </script>
